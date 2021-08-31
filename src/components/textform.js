@@ -46,14 +46,14 @@ export default function Textform(props) {
             <div className="mb-3">
                 <textarea className={`form-control border-1 border-${props.mode}`} style={{background: "transparent",color:props.mode==="dark"?"black":"white"}} value={text} onChange = {handleonchange} id="exampleFormControlTextarea1" rows="8">    </textarea>
             </div>
-            <button type="button" className={`btn btn-${props.mode} mx-1`} onClick ={handletoupper}>Convert to Uppercase</button>
-            <button type="button" className={`btn btn-${props.mode} mx-1`} onClick ={handletolower}>Convert to Lowercase</button>
-            <button type="button" className={`btn btn-${props.mode} mx-1`} onClick ={handleclear}>Clear text</button>
-            <button type="button" className={`btn btn-${props.mode} mx-1`} onClick ={handlecountvowel}>Count number of vowels</button>
+            <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handletoupper}>Convert to Uppercase</button>
+            <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handletolower}>Convert to Lowercase</button>
+            <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handleclear}>Clear text</button>
+            <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handlecountvowel}>Count number of vowels</button>
         </div>
         <div className="container mt-3" style={{color : props.mode==="dark"?"black":"white"}}>
             <h2>Words and Characters Count</h2>
-            <p>{words} words and {text.length} characters</p>
+            <p>{text.split(" ").filter((a)=>{return a.length!==0}).length} words and {text.length} characters</p>
             <p>{(words * 0.008).toFixed(4)} minutes to read above sentence </p>
 
             <h2>Text Preview</h2>
