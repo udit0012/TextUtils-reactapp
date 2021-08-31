@@ -34,8 +34,12 @@ export default function Textform(props) {
         setText(event.target.value);
         
     }
+    const handleCopy = ()=>{
+        navigator.clipboard.writeText(text);
+        props.showAlert("Text copied to clipboard","success");
+    }
     useEffect(() => {
-        let wordsarr = text.split(" ").filter(ele=>ele.length!==0)
+        let wordsarr = text.split(/\s+/).filter(ele=>ele.length!==0)
         text===""?setWords(0):setWords(wordsarr.length)
         console.log("aur bhai")
     }, [text,words]);
@@ -49,11 +53,12 @@ export default function Textform(props) {
             <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handletoupper}>Convert to Uppercase</button>
             <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handletolower}>Convert to Lowercase</button>
             <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handleclear}>Clear text</button>
+            <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handleCopy}>Copy text</button>
             <button disabled={text.length===0} type="button" className={`btn btn-${props.mode} mx-1 my-1`} onClick ={handlecountvowel}>Count number of vowels</button>
         </div>
         <div className="container mt-3" style={{color : props.mode==="dark"?"black":"white"}}>
             <h2>Words and Characters Count</h2>
-            <p>{text.split(" ").filter((a)=>{return a.length!==0}).length} words and {text.length} characters</p>
+            <p>{words} words and {text.length} characters</p>
             <p>{(words * 0.008).toFixed(4)} minutes to read above sentence </p>
 
             <h2>Text Preview</h2>
